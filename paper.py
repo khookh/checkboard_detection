@@ -66,11 +66,11 @@ def _lc_max(im, ksize):
     for i in range(ksize // 2, im.shape[0] - ksize // 2):
         if i % 100 == 0: print(".", end="")
         for j in range(ksize // 2, im.shape[1] - ksize // 2):
-            output[i, j] = np.max(im[i - ksize // 2:i + ksize // 2, j - ksize // 2:j + ksize // 2])
-            #if im[i, j] != max:
-            #    output[i, j] = 0  # non maximal suppression
-            #else:
-            #    output[i, j] = max
+            max = np.max(im[i - ksize // 2:i + ksize // 2, j - ksize // 2:j + ksize // 2])
+            if im[i, j] != max:
+                output[i, j] = 0  # non maximal suppression
+            else:
+                output[i, j] = max
     print("finished!")
     cv.imwrite('src/frep_max.png', output.astype('uint8'))
     return output.astype('uint8')
