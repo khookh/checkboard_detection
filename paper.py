@@ -17,8 +17,11 @@ copy = img
 # blur the image by convoluting the image with box filters
 def _blur(im, n, m):
     kernel = np.ones((n, m))
+    # kernelb = np.ones((m, n))
     kernel /= m
+    # kernelb /= m
     im[:, :] = convolve2d(im[:, :], kernel, "same")
+    #im[:, :] = convolve2d(im[:, :], kernelb, "same")
     return im.astype('uint8')
 
 
@@ -91,7 +94,7 @@ def _mask(im):
             if im[i, j] != 0:
                 original[i, j, :] = 0
                 original[i, j, 2] = im[i, j]
-    cv.imwrite('src/detected.png',original.astype('uint8'))
+    cv.imwrite('src/detected_left2.png', original.astype('uint8'))
     return original.astype('uint8')
 
 
